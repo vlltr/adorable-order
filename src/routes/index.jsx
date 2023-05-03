@@ -1,5 +1,7 @@
 const routeNames = {
-  home: '/',
+  'home': '/',
+  'tests.index': '/tests',
+  'tests.create': '/tests/create',
 }
 
 function route(name, params = {}) {
