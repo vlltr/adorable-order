@@ -1,8 +1,10 @@
 import { route } from '@/routes'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export function useTest() {
+  const navigate = useNavigate()
+
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState({
@@ -16,7 +18,24 @@ export function useTest() {
     ],
   })
 
-  const navigate = useNavigate()
+  const [tests, setTests] = useState([])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    getTests({signal: controller.signal})
+
+    return () => {
+      controller.abort()
+    }
+  }, [])
+
+  async function getTests({signal} = {}){
+    return axios.get('tests', {signal})
+      .then(response => setTests(response.data))
+      .catch(() => {})
+  }
+
+
 
   function addItem() {
     const newDefaultItem = {
@@ -55,5 +74,6 @@ export function useTest() {
     createTest,
     addItem,
     removeItem,
+    tests,
   }
 }
