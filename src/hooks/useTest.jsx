@@ -97,6 +97,11 @@ export function useTest(id = null) {
       })
       .finally(() => setLoading(false))
   }
+
+  function destroyTest(test){
+    return axios.delete(`tests/${test.testid}`)
+  }
+
   return {
     test: { data, setData, errors, loading },
     createTest,
@@ -104,5 +109,7 @@ export function useTest(id = null) {
     removeItem,
     tests,
     updateTest,
+    destroyTest,
+    getTests,
   }
 }

@@ -3,7 +3,14 @@ import { route } from '@/routes'
 import { Link } from 'react-router-dom'
 
 function TestsList() {
-  const { tests } = useTest()
+  const { tests, destroyTest, getTests } = useTest()
+
+
+  async function onDeleteTest(test) {
+    await destroyTest(test)
+    await getTests()
+  }
+
   return (
     <div className='flex flex-col mx-auto md:w-3/5 w-full'>
       <h1 className='heading'>Test List</h1>
@@ -39,7 +46,10 @@ function TestsList() {
                 >
                   Edit
                 </Link>
-                <button type="button" className="btn text-white bg-red-600 hover:bg-red-500 text-sm">
+                <button type="button"
+                  className="btn text-white bg-red-600 hover:bg-red-500 text-sm"
+                  onClick={() => {onDeleteTest(test)}}
+                >
                   X
                 </button>
               </div>
