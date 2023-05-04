@@ -37,9 +37,9 @@ function TestsList() {
                 </div>
               </div>
               <div className="flex gap-1">
-                <button type="button" className="btn text-white bg-green-600 hover:bg-green-500 text-sm">
+                <Link to={ route('tests.show', { id: test.testid }) } className="btn text-white bg-green-600 hover:bg-green-500 text-sm">
                   Show
-                </button>
+                </Link>
                 <Link
                   to={ route('tests.edit', { id: test.testid }) }
                   className="btn btn-secondary text-sm"
