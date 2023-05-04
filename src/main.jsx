@@ -7,6 +7,9 @@ import EditTest from '@/views/tests/EditTest'
 import ShowTest from '@/views/tests/ShowTest'
 import TestsList from '@/views/tests/TestsList'
 
+import ResultList from '@/views/results/ResultList'
+
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -30,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path={ route('tests.create') } element={<CreateTest />} />
           <Route path={ route('tests.edit') } element={<EditTest />} />
           <Route path={ route('tests.show') } element={<ShowTest />} />
+          <Route path={ route('results.index') } element={<ResultList />} />
 
         </Route>
       </Routes>

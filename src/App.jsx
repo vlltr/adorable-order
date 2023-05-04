@@ -15,6 +15,9 @@ function App() {
               <NamedLink name="tests.index">
                 Tests
               </NamedLink>
+              <NamedLink name="results.index">
+                Results
+              </NamedLink>
             </div>
           </nav>
         </div>
