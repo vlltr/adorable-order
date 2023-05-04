@@ -2,9 +2,8 @@ import { route } from '@/routes'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function useTest() {
+export function useTest(id = null) {
   const navigate = useNavigate()
-
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState({
@@ -23,11 +22,20 @@ export function useTest() {
   useEffect(() => {
     const controller = new AbortController()
     getTests({signal: controller.signal})
-
     return () => {
       controller.abort()
     }
   }, [])
+
+  useEffect(() => {
+    if (id !== null) {
+      const controller = new AbortController()
+      getTest(id, {signal: controller.signal})
+      return () => {
+        controller.abort()
+      }
+    }
+  }, [id])
 
   async function getTests({signal} = {}){
     return axios.get('tests', {signal})
@@ -35,7 +43,27 @@ export function useTest() {
       .catch(() => {})
   }
 
+  async function getTest(id, {signal} = {}){
+    setLoading(true)
+    return axios.get(`tests/${id}`, {signal})
+      .then(response => setData(response.data))
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }
 
+  async function updateTest(test){
+    setLoading(true)
+    setErrors({})
+
+    return axios.put(`tests/${test.testid}`, test)
+      .then(() => navigate(route('tests.index')))
+      .catch(error => {
+        if (error.response.status === 422) {
+          setErrors(error.response.data.errors)
+        }
+      })
+      .finally(() => setLoading(false))
+  }
 
   function addItem() {
     const newDefaultItem = {
@@ -75,5 +103,6 @@ export function useTest() {
     addItem,
     removeItem,
     tests,
+    updateTest,
   }
 }

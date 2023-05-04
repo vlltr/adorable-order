@@ -2,6 +2,7 @@ const routeNames = {
   'home': '/',
   'tests.index': '/tests',
   'tests.create': '/tests/create',
+  'tests.edit': '/tests/:id/edit',
 }
 
 function route(name, params = {}) {

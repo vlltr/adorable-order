@@ -18,7 +18,7 @@ function TestsList() {
         { tests.length > 0 && tests.map(test => {
           return (
             <div
-              key={ test.id }
+              key={ test.testid }
               className="flex bg-gray-100 w-full p-2 justify-between"
             >
               <div className="flex items-center overflow-hidden w-full">
@@ -33,9 +33,12 @@ function TestsList() {
                 <button type="button" className="btn text-white bg-green-600 hover:bg-green-500 text-sm">
                   Show
                 </button>
-                <button type="button" className="btn btn-secondary text-sm">
+                <Link
+                  to={ route('tests.edit', { id: test.testid }) }
+                  className="btn btn-secondary text-sm"
+                >
                   Edit
-                </button>
+                </Link>
                 <button type="button" className="btn text-white bg-red-600 hover:bg-red-500 text-sm">
                   X
                 </button>
