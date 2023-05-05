@@ -6,6 +6,9 @@ const routeNames = {
   'tests.show': '/tests/:id/show',
   'results.index': '/results',
   'results.create': '/results/create',
+  'results.edit': '/results/:id/edit',
+  'results.show': '/results/:id/show',
+
 }
 
 function route(name, params = {}) {

@@ -35,11 +35,11 @@ function ResultList() {
                 </div>
               </div>
               <div className="flex gap-1">
-                <Link
-                  className="btn text-white bg-green-600 hover:bg-green-500 text-sm">
+                <Link to={ route('results.show', { id: result.resultid }) } className="btn text-white bg-green-600 hover:bg-green-500 text-sm">
                   Show
                 </Link>
                 <Link
+                  to={ route('results.edit', { id: result.resultid }) }
                   className="btn btn-secondary text-sm"
                 >
                   Edit

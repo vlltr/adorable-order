@@ -2,7 +2,7 @@ import { route } from '@/routes'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export function useResult(){
+export function useResult(id = null){
   const navigate = useNavigate()
   const [results, setResults] = useState([])
   const [errors, setErrors] = useState({})
@@ -33,10 +33,28 @@ export function useResult(){
     }
   }, [])
 
+  useEffect(() => {
+    if (id !== null) {
+      const controller = new AbortController()
+      getResult(id, {signal: controller.signal})
+      return () => {
+        controller.abort()
+      }
+    }
+  }, [id])
+
   async function getResults({signal} = {}){
     return axios.get('results', {signal})
       .then(response => setResults(response.data))
       .catch(() => {})
+  }
+
+  async function getResult(id, {signal} = {}){
+    setLoading(true)
+    return axios.get(`results/${id}`, {signal})
+      .then(response => setData(response.data))
+      .catch(() => {})
+      .finally(() => setLoading(false))
   }
 
   function addItem() {
@@ -74,6 +92,20 @@ export function useResult(){
       .finally(() => setLoading(false))
   }
 
+  async function updateResult(result){
+    setLoading(true)
+    setErrors({})
+
+    return axios.put(`results/${result.resultid}`, result)
+      .then(() => navigate(route('results.index')))
+      .catch(error => {
+        if (error.response.status === 422) {
+          setErrors(error.response.data.errors)
+        }
+      })
+      .finally(() => setLoading(false))
+  }
+
   function destroyResult(result){
     return axios.delete(`results/${result.resultid}`)
   }
@@ -86,6 +118,7 @@ export function useResult(){
     resultOptions,
     destroyResult,
     getResults,
+    updateResult,
   }
 }
 

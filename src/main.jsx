@@ -8,7 +8,9 @@ import ShowTest from '@/views/tests/ShowTest'
 import TestsList from '@/views/tests/TestsList'
 
 import CreateResult from '@/views/results/CreateResult'
+import EditResult from '@/views/results/EditResult'
 import ResultList from '@/views/results/ResultList'
+import ShowResult from '@/views/results/ShowResult'
 
 
 import React from 'react'
@@ -37,6 +39,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <Route path={ route('results.index') } element={<ResultList />} />
           <Route path={ route('results.create') } element={<CreateResult />} />
+          <Route path={ route('results.edit') } element={<EditResult />} />
+          <Route path={ route('results.show') } element={<ShowResult />} />
 
         </Route>
       </Routes>
