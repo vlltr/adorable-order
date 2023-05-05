@@ -3,8 +3,12 @@ import { route } from '@/routes'
 import { Link } from 'react-router-dom'
 
 function ResultList() {
-  const { results} = useResult()
+  const { results, destroyResult, getResults} = useResult()
 
+  async function onDeleteResult(result) {
+    await destroyResult(result)
+    await getResults()
+  }
   return (
     <div className='flex flex-col mx-auto md:w-3/5 w-full'>
       <h1 className='heading'>Result List</h1>
@@ -42,7 +46,7 @@ function ResultList() {
                 </Link>
                 <button type="button"
                   className="btn text-white bg-red-600 hover:bg-red-500 text-sm"
-
+                  onClick={() => {onDeleteResult(result)}}
                 >
                   X
                 </button>

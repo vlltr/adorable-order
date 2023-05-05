@@ -73,6 +73,10 @@ export function useResult(){
       })
       .finally(() => setLoading(false))
   }
+
+  function destroyResult(result){
+    return axios.delete(`results/${result.resultid}`)
+  }
   return {
     result: { data, setData, errors, loading },
     results,
@@ -80,6 +84,8 @@ export function useResult(){
     addItem,
     removeItem,
     resultOptions,
+    destroyResult,
+    getResults,
   }
 }
 
