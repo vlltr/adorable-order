@@ -19,7 +19,7 @@ function ShowResult() {
             id="testname"
             name="testname"
             type="text"
-            value={result.data.testid + ' - '+ result.data.testname}
+            value={result.data.testid ?? '' + ' - '+ result.data.testname ?? ''}
             className="form-input plate"
             disabled={true}
           />

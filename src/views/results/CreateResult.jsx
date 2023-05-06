@@ -25,7 +25,7 @@ function CreateResult() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col mx-auto md:w-96 w-full">
-        <h1 className="heading">New Test</h1>
+        <h1 className="heading">New Result</h1>
         <div className="flex flex-col gap-2 mb-4">
           <label htmlFor="testid" className="required">Test</label>
           <select
